@@ -20,12 +20,6 @@ public class SimpleCalculator extends JFrame {
         addComponentToPanel(inputPanel, new JLabel("Input the second number:"), 0, 1);
         JTextField num2TextField = addComponentToPanel(inputPanel, new JTextField(10), 1, 1);
 
-        JButton backButton = addComponentToPanel(inputPanel, new JButton("Back"), 0, 2, (event) -> {
-            remove(inputPanel);
-            createInputPanel();
-            revalidate();
-            repaint();
-        });
 
         JButton confirmInput = addComponentToPanel(inputPanel, new JButton("Confirm"), 1, 2, (event) -> {
             try {
@@ -45,14 +39,14 @@ public class SimpleCalculator extends JFrame {
     }
 
     private void createSettingPanel() {
-        JPanel settingPanel = new JPanel(new GridBagLayout());
+        JPanel settingPanel = new JPanel(new GridBagLayout()), resultPanel = new JPanel(new GridBagLayout());
         addComponentToPanel(settingPanel, new JLabel("Choose display options:"), 0, 0);
         JCheckBox add_check = addComponentToPanel(settingPanel, new JCheckBox("Add"), 0, 1);
         JCheckBox sub_check = addComponentToPanel(settingPanel, new JCheckBox("Subtract"), 0, 2);
         JCheckBox mul_check = addComponentToPanel(settingPanel, new JCheckBox("Muliply"), 0, 3);
         JCheckBox div_check = addComponentToPanel(settingPanel, new JCheckBox("Divide"), 0, 4);
 
-        JButton backButton = addComponentToPanel(settingPanel, new JButton("Back"), 0, 5, (event) -> {
+        addComponentToPanel(settingPanel, new JButton("Back"), 0, 5, (event) -> {
             remove(settingPanel);
             createInputPanel();
             revalidate();
@@ -64,7 +58,7 @@ public class SimpleCalculator extends JFrame {
                 JOptionPane.showMessageDialog(this, "Please select at least one operation.", "No operation selected", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            JPanel resultPanel = new JPanel(new GridBagLayout());
+
             if (add_check.isSelected()) {
                 addComponentToPanel(resultPanel, new JLabel("Sum: " + (num1 + num2)), 0, 1);
             }
@@ -83,6 +77,15 @@ public class SimpleCalculator extends JFrame {
             repaint();
         });
 
+
+        addComponentToPanel(resultPanel, new JButton("Back"), 0, 5, (event) -> {
+            remove(resultPanel);
+            createInputPanel();
+            revalidate();
+            repaint();
+        });
+
+        
         getContentPane().add(settingPanel);
         getRootPane().setDefaultButton(confirmSetting);
 
