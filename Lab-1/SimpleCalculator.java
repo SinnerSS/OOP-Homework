@@ -12,6 +12,7 @@ public class SimpleCalculator extends JFrame {
     public SimpleCalculator() {
 
 
+
         setTitle("Simple Calculator");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,24 +37,6 @@ public class SimpleCalculator extends JFrame {
 
         JPanel settingPanel = new JPanel(new GridBagLayout());
 
-        
-
-        addComponentToPanel(inputPanel, new JButton("Confirm"), 1, 2, (event) -> {
-
-
-            num1 = Double.parseDouble(num1TextField.getText());
-            num2 = Double.parseDouble(num2TextField.getText());
-
-
-            remove(inputPanel);
-            add(settingPanel);
-            revalidate();
-            repaint();
-        
-
-        });
-
-
 
         addComponentToPanel(settingPanel, new JLabel("Choose display options:"), 0, 0);
 
@@ -75,8 +58,8 @@ public class SimpleCalculator extends JFrame {
 
 
 
-        addComponentToPanel(settingPanel, new JButton("Confirm"), 0, 5, (event) -> {
-            
+        JButton confirmSetting = addComponentToPanel(settingPanel, new JButton("Confirm"), 0, 5, (event) -> {
+
 
             if(add_check.isSelected()) {
                 addComponentToPanel(resultPanel, new JLabel("Sum: "+ (num1 + num2)), 0, 1);
@@ -103,14 +86,39 @@ public class SimpleCalculator extends JFrame {
             revalidate();
             repaint();
                  
-
             
+            
+        });
+
+        
+
+        JButton confirmInput = addComponentToPanel(inputPanel, new JButton("Confirm"), 1, 2, (event) -> {
+
+
+            num1 = Double.parseDouble(num1TextField.getText());
+            num2 = Double.parseDouble(num2TextField.getText());
+
+
+            remove(inputPanel);
+            add(settingPanel);
+            revalidate();
+            repaint();
+
+    
+            
+            getRootPane().setDefaultButton(confirmSetting);
+
+
         });
 
 
 
-        getContentPane().add(inputPanel, BorderLayout.CENTER);
+        add(inputPanel, BorderLayout.CENTER);
         setVisible(true);
+
+
+        getRootPane().setDefaultButton(confirmInput);
+
 
 
     }
