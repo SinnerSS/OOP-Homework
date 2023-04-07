@@ -49,7 +49,7 @@ public class SimpleCalculator extends JFrame {
             add(settingPanel);
             revalidate();
             repaint();
-
+        
 
         });
 
@@ -70,7 +70,42 @@ public class SimpleCalculator extends JFrame {
         JCheckBox div_check = addComponentToPanel(settingPanel, new JCheckBox("Divide"), 0, 4);
 
 
-        addComponentToPanel(settingPanel, new JButton("Confirm"), 0, 5);
+
+        JPanel resultPanel = new JPanel(new GridBagLayout());
+
+
+
+        addComponentToPanel(settingPanel, new JButton("Confirm"), 0, 5, (event) -> {
+            
+
+            if(add_check.isSelected()) {
+                addComponentToPanel(resultPanel, new JLabel("Sum: "+ (num1 + num2)), 0, 1);
+            }
+
+
+            if(sub_check.isSelected()) {
+                addComponentToPanel(resultPanel, new JLabel("Difference: "+ (num1 - num2)), 0, 2);
+            }
+
+
+            if(mul_check.isSelected()) {
+                addComponentToPanel(resultPanel, new JLabel("Product: "+ (num1 * num2)), 0, 3);
+            }
+
+
+            if(div_check.isSelected()) {
+                addComponentToPanel(resultPanel, new JLabel("Quotient: "+ (num1 / num2)), 0, 4);
+            }
+
+
+            remove(settingPanel);
+            add(resultPanel);
+            revalidate();
+            repaint();
+                 
+
+            
+        });
 
 
 
