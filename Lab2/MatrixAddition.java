@@ -38,6 +38,8 @@ public class MatrixAddition extends JFrame {
                 rows = Integer.parseInt(rowTextField.getText());
                 columns = Integer.parseInt(columnTextField.getText());
 
+                if(rows <= 0 || columns <= 0) throw new ArithmeticException();
+
 
                 remove(inputPanel);
                 createMatrixInputPanel();
@@ -45,7 +47,7 @@ public class MatrixAddition extends JFrame {
                 repaint();
 
 
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException|ArithmeticException e) {
 
                 JOptionPane.showMessageDialog(this, "Please enter valid numbers.", "Invalid input", JOptionPane.ERROR_MESSAGE);
 
@@ -239,6 +241,6 @@ public class MatrixAddition extends JFrame {
     public static void main(String[] args){
 
         SwingUtilities.invokeLater(() -> new MatrixAddition().setVisible(true));
-        
+
     }
 }
