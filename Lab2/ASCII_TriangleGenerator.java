@@ -13,9 +13,11 @@ public class ASCII_TriangleGenerator {
 
         while(!validInput) {
             try {
-                System.out.print("n= ");
+                System.out.print("n=");
                 n = keyboard.nextInt();
+
                 if(n<0) throw new ArithmeticException();
+
                 validInput = true;
 
             }
