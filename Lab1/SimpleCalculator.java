@@ -74,6 +74,8 @@ public class SimpleCalculator extends JFrame {
 
 
         addComponentToPanel(settingPanel, new JButton("Back"), 0, 5, (event) -> {
+
+
             remove(settingPanel);
             createInputPanel();
             revalidate();
@@ -122,6 +124,8 @@ public class SimpleCalculator extends JFrame {
 
 
         addComponentToPanel(resultPanel, new JButton("Back"), 0, 5, (event) -> {
+
+            
             remove(resultPanel);
             createInputPanel();
             revalidate();
