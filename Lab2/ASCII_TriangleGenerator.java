@@ -6,8 +6,6 @@ import java.util.Locale;
 public class ASCII_TriangleGenerator {
 
     public static void main(String args[]) {
-        Locale.setDefault(Locale.US);
-
         Scanner keyboard = new Scanner(System.in);
 
         int n = 0;
@@ -28,7 +26,7 @@ public class ASCII_TriangleGenerator {
             }
             catch(ArithmeticException e){
                 System.out.println("Invalid input! Try again.");
-                
+
             }
         }
 
