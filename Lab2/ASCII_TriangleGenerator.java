@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 public class ASCII_TriangleGenerator {
 
     
-    public static void main(String args[]) {
+    public static void main(String args[]){
         Scanner keyboard = new Scanner(System.in);
 
         int n = 0;

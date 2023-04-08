@@ -9,7 +9,7 @@ public class DayInMonth {
         return false;
         
     }
-    public static void main(String args[]) {
+    public static void main(String args[]){
         Scanner keyboard = new Scanner(System.in);
 
         int d=0, m = 0,y = 0;
