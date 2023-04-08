@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import java.util.Locale;
 
 
 public class ASCII_TriangleGenerator {
