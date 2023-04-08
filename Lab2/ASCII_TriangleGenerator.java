@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 import java.util.Locale;
 
 
@@ -9,8 +10,27 @@ public class ASCII_TriangleGenerator {
 
         Scanner keyboard = new Scanner(System.in);
 
-        System.out.print("n= ");
-        int n = keyboard.nextInt();
+        int n = 0;
+        boolean validInput = false;
+
+        while(!validInput) {
+            try {
+                System.out.print("n= ");
+                n = keyboard.nextInt();
+                if(n<0) throw new ArithmeticException();
+                validInput = true;
+
+            }
+            catch(InputMismatchException e) {
+                System.out.println("Invalid input! Try again.");
+                keyboard.next();
+
+            }
+            catch(ArithmeticException e){
+                System.out.println("Invalid input! Try again.");
+                
+            }
+        }
 
         String Star = "";
 
