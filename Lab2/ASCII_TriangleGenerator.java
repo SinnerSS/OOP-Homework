@@ -31,6 +31,8 @@ public class ASCII_TriangleGenerator {
             }
         }
 
+        keyboard.close();
+
         String Star = "";
 
         for(int i=0; i<n; i++) {
@@ -47,8 +49,6 @@ public class ASCII_TriangleGenerator {
         }
 
         System.out.println(Star);
-
-        keyboard.close();
 
     }
 }
