@@ -1,5 +1,3 @@
-package AIMS;
-
 public class Order {
     public static final int MAX_NUMBER_ORDER = 10;
 
