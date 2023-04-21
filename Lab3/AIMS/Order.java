@@ -28,7 +28,8 @@ public class Order {
                 qtyOrdered -= 1;
                 while(itemsOrdered[i] != null) {
                     itemsOrdered[i] = itemsOrdered[i+1];
-                    return true;
+                    i++;
+                    
                 }
             }
         }
