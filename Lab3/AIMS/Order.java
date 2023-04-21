@@ -17,20 +17,23 @@ public class Order {
         if(qtyOrdered < MAX_NUMBER_ORDER) {
             itemsOrdered[qtyOrdered] = disc;
             qtyOrdered += 1;
+            System.out.println("The disc has been added");
             return true;
         }
         return false;
     }
 
     public boolean removeDigitalVideoDisc(DigitalVideoDisc disc) {
-        for(int i = 0; i < qtyOrdered; i++) {
-            if(itemsOrdered[i] == disc) {
-                qtyOrdered -= 1;
-                while(itemsOrdered[i] != null) {
-                    itemsOrdered[i] = itemsOrdered[i+1];
-                    i++;
-                    
+        for (int i = 0; i < qtyOrdered; i++) {
+            if (itemsOrdered[i] == disc) {
+                for (int j = i; j < qtyOrdered - 1; j++) {
+                    itemsOrdered[j] = itemsOrdered[j+1];
+                    if(itemsOrdered[j+1] == null) break;
                 }
+                itemsOrdered[qtyOrdered - 1] = null;
+                qtyOrdered -= 1;
+                System.out.println("The disc has been removed");
+                return true;
             }
         }
         return false;
