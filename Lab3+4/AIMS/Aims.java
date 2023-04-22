@@ -31,7 +31,8 @@ public class Aims {
         System.out.printf("%.2f\n",anOrder.totalCost());
 
         anOrder.removeDigitalVideoDisc(dvd1);
-        System.out.print("Total Cost after removing dvd1 is: ");
+        System.out.print("Total Cost after removing " + dvd1.getTitle() + " is: ");
         System.out.printf("%.2f\n",anOrder.totalCost());
+
     }
 }
