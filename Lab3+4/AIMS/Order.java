@@ -26,12 +26,14 @@ public class Order {
     public boolean removeDigitalVideoDisc(DigitalVideoDisc disc) {
         for (int i = 0; i < qtyOrdered; i++) {
             if (itemsOrdered[i] == disc) {
-                for (int j = i; j < qtyOrdered - 1; j++) {
-                    itemsOrdered[j] = itemsOrdered[j+1];
-                    if(itemsOrdered[j+1] == null) break;
+                if (i == qtyOrdered - 1) {
+                    itemsOrdered[i] = null;
+                    qtyOrdered--;
+                } else {
+                    System.arraycopy(itemsOrdered, i+1, itemsOrdered, i, qtyOrdered - i - 1);
+                    itemsOrdered[qtyOrdered - 1] = null;
+                    qtyOrdered--;
                 }
-                itemsOrdered[qtyOrdered - 1] = null;
-                qtyOrdered -= 1;
                 System.out.println("The disc has been removed");
                 return true;
             }
