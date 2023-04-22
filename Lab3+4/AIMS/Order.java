@@ -23,6 +23,29 @@ public class Order {
         return false;
     }
 
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        if (qtyOrdered < MAX_NUMBER_ORDER) {
+            itemsOrdered[qtyOrdered++] = dvd1;
+        } else {
+            System.out.println("The order is already full. " + dvd1.getTitle() + " could not be added.");
+        }
+        if (qtyOrdered < MAX_NUMBER_ORDER) {
+                itemsOrdered[qtyOrdered++] = dvd2;
+        } else {
+            System.out.println("The order is already full. " + dvd2.getTitle() + " could not be added.");
+        }
+    }
+
+    public void addDigitalVideoDisc(DigitalVideoDisc... dvdList) {
+        for (DigitalVideoDisc dvd : dvdList) {
+            if (qtyOrdered < MAX_NUMBER_ORDER) {
+                itemsOrdered[qtyOrdered++] = dvd;
+            } else {
+                System.out.println("The order is already full. " + dvd.getTitle() + " could not be added.");
+            }
+        }
+    }
+
     public boolean removeDigitalVideoDisc(DigitalVideoDisc disc) {
         for (int i = 0; i < qtyOrdered; i++) {
             if (itemsOrdered[i] == disc) {
