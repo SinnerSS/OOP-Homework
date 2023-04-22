@@ -8,7 +8,7 @@ public class DateTest {
     date1.print(); // expected output: current date in the format dd/mm/yyyy
 
     // Testing 3 parameter constructor
-    MyDate date2 = new MyDate(22, 4, 2023);
+    MyDate date2 = new MyDate(12, 4, 2023);
     date2.print(); // expected output: 22/04/2023
 
     // Testing string parameter constructor
@@ -39,5 +39,20 @@ public class DateTest {
     date9.setMonth(2); // expected output: Invalid month!
     date9.setYear(2022);
     date9.print(); // expected output: 30/currentMonth/2022
+
+    
+    MyDate date10 = new MyDate();
+    date10.setDay("eleventh");
+    date10.setMonth("August");
+    date10.setYear("twenty twenty-two");
+    date10.print();
+   
+    DateUtils.compareDates(date3, date4);
+
+    MyDate[] dateList = {date2, date3, date4};
+    DateUtils.sortDates(dateList);
+    for (MyDate date : dateList) {
+        System.out.print(date.toString() + " ");
+    }
     }
 }
