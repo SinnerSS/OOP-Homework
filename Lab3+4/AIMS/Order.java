@@ -1,3 +1,5 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Order {
     public static final int MAX_NUMBER_ORDER = 10;
     public static final int MAX_LIMITED_ORDER = 5;
@@ -124,5 +126,12 @@ public class Order {
 
         System.out.println("*******************************************");
     }
+
+    public DigitalVideoDisc getALuckyItem(){
+        int luckyIndex = ThreadLocalRandom.current().nextInt(qtyOrdered);
+
+        return itemsOrdered[luckyIndex];
+    }
+
     
 }
