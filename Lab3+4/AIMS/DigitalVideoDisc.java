@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class DigitalVideoDisc {
     private String title;
     private String category;
@@ -52,6 +54,15 @@ public class DigitalVideoDisc {
         this.director = director;
         this.length = length;
         this.cost = cost;
+    }
+    public boolean search(String title){
+        String[] tokens = title.toUpperCase().split(" ");
+        String[] titleTokens = this.title.toUpperCase().split(" ");
+        for(String token : tokens){
+            if(!Arrays.asList(titleTokens).contains(token)) return false;
+        }
+
+        return true;
     }
 }
 
