@@ -1,7 +1,7 @@
 public class Media {
-    private String title;
-    private String category;
-    private float cost;
+    private String title = null;
+    private String category = null;
+    private float cost = 0;
     public String getTitle() {
         return title;
     }
