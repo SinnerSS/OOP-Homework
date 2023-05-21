@@ -113,7 +113,7 @@ public class Order {
 
     public Media getALuckyItem(){
         int luckyIndex = ThreadLocalRandom.current().nextInt(itemsOrdered.size());
-
+        itemsOrdered.get(luckyIndex).setCost(0);
         return itemsOrdered.get(luckyIndex);
     }
 
