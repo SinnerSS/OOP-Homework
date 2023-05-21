@@ -1,23 +1,8 @@
 import java.util.Arrays;
 
-public class DigitalVideoDisc {
-    private String title;
-    private String category;
+public class DigitalVideoDisc extends Media{
     private String director;
     private int length;
-    private float cost;
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public String getCategory() {
-        return category;
-    }
-    public void setCategory(String category) {
-        this.category = category;
-    }
     public String getDirector() {
         return director;
     }
@@ -30,34 +15,28 @@ public class DigitalVideoDisc {
     public void setLength(int length) {
         this.length = length;
     }
-    public float getCost() {
-        return cost;
-    }
-    public void setCost(float cost) {
-        this.cost = cost;
-    }
     public DigitalVideoDisc(String title) {
-        this.title = title;
+        super.setTitle(title);
     }
     public DigitalVideoDisc(String title, String category) {
-        this.title = title;
-        this.category = category;
+        super.setTitle(title);
+        super.setCategory(category);
     }
     public DigitalVideoDisc(String title, String category, String director) {
-        this.title = title;
-        this.category = category;
+        super.setTitle(title);
+        super.setCategory(category);
         this.director = director;
     }
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        this.title = title;
-        this.category = category;
+        super.setTitle(title);
+        super.setCategory(category);
         this.director = director;
         this.length = length;
-        this.cost = cost;
+        super.setCost(cost);
     }
     public boolean search(String title){
         String[] tokens = title.toUpperCase().split(" ");
-        String[] titleTokens = this.title.toUpperCase().split(" ");
+        String[] titleTokens = this.getTitle().toUpperCase().split(" ");
         for(String token : tokens){
             if(!Arrays.asList(titleTokens).contains(token)) return false;
         }
