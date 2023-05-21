@@ -15,7 +15,7 @@ public class DiskTest {
 
         Order order1 = new Order();
 
-        order1.addDigitalVideoDisc(dvd1, dvd2, dvd3, dvd4);
+        order1.addMedia(dvd1, dvd2, dvd3, dvd4);
 
         // Testing random item method
         System.out.println(order1.getALuckyItem().getTitle());// expected output: Random title

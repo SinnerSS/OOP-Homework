@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Order {
@@ -6,9 +8,8 @@ public class Order {
 
     public static int nbOrders = 0;
 
-    private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBER_ORDER];
+    private List<Media> itemsOrdered = new ArrayList<>();
 
-    private int qtyOrdered = 0;
     private String dateOrdered;
 
     
@@ -33,69 +34,49 @@ public class Order {
         this.dateOrdered = dateOrdered;
     }
 
-    public int getQtyOrdered() {
-        return qtyOrdered;
-    }
-
-    public void setQtyOrdered(int qtyOrdered) {
-        this.qtyOrdered = qtyOrdered;
-    }
-
-    public boolean addDigitalVideoDisc(DigitalVideoDisc disc) {
-        if(qtyOrdered < MAX_NUMBER_ORDER) {
-            itemsOrdered[qtyOrdered] = disc;
-            qtyOrdered += 1;
-            System.out.println("The disc has been added");
+    public boolean addMedia(Media media) {
+        if(itemsOrdered.size() < MAX_NUMBER_ORDER) {
+            itemsOrdered.add(media);
+            System.out.println("The media has been added");
             return true;
         }
         return false;
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-        if (qtyOrdered < MAX_NUMBER_ORDER) {
-            itemsOrdered[qtyOrdered++] = dvd1;
+    public void addMedia(Media media1, Media media2) {
+        if (itemsOrdered.size() < MAX_NUMBER_ORDER) {
+            itemsOrdered.add(media1);
         } else {
-            System.out.println("The order is already full. " + dvd1.getTitle() + " could not be added.");
+            System.out.println("The order is already full. " + media1.getTitle() + " could not be added.");
         }
-        if (qtyOrdered < MAX_NUMBER_ORDER) {
-                itemsOrdered[qtyOrdered++] = dvd2;
+        if (itemsOrdered.size() < MAX_NUMBER_ORDER) {
+            itemsOrdered.add(media2);
         } else {
-            System.out.println("The order is already full. " + dvd2.getTitle() + " could not be added.");
+            System.out.println("The order is already full. " + media2.getTitle() + " could not be added.");
         }
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc... dvdList) {
-        for (DigitalVideoDisc dvd : dvdList) {
-            if (qtyOrdered < MAX_NUMBER_ORDER) {
-                itemsOrdered[qtyOrdered++] = dvd;
+    public void addMedia(Media... mediaList) {
+        for (Media media : mediaList) {
+            if (itemsOrdered.size() < MAX_NUMBER_ORDER) {
+                itemsOrdered.add(media);
             } else {
-                System.out.println("The order is already full. " + dvd.getTitle() + " could not be added.");
+                System.out.println("The order is already full. " + media.getTitle() + " could not be added.");
             }
         }
     }
 
-    public boolean removeDigitalVideoDisc(DigitalVideoDisc disc) {
-        for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsOrdered[i] == disc) {
-                if (i == qtyOrdered - 1) {
-                    itemsOrdered[i] = null;
-                    qtyOrdered--;
-                } else {
-                    System.arraycopy(itemsOrdered, i+1, itemsOrdered, i, qtyOrdered - i - 1);
-                    itemsOrdered[qtyOrdered - 1] = null;
-                    qtyOrdered--;
-                }
-                System.out.println("The disc has been removed");
-                return true;
-            }
-        }
-        return false;
+    public boolean removeMedia(Media media) {
+        if(!itemsOrdered.contains(media)) return false;
+        itemsOrdered.remove(media);
+        System.out.println("The media has been removed");
+        return true;
     }
 
     public float totalCost() {
         float totalCost = 0;
-        for(int i = 0; i < qtyOrdered; i++) {
-            totalCost += itemsOrdered[i].getCost();
+        for(int i = 0; i < itemsOrdered.size(); i++) {
+            totalCost += itemsOrdered.get(i).getCost();
         }
         return totalCost;
     }
@@ -107,16 +88,19 @@ public class Order {
         System.out.println("Ordered Items:");
         
 
-        for(int i=0; i < qtyOrdered; i++) {
-    
-            String title = itemsOrdered[i] != null ? itemsOrdered[i].getTitle() : "N/A";
-            String category = itemsOrdered[i] != null ? itemsOrdered[i].getCategory() : "N/A";
-            String director = itemsOrdered[i] != null ? itemsOrdered[i].getDirector() : "N/A";
-            int length = itemsOrdered[i] != null ? itemsOrdered[i].getLength() : 0;
-            double price = itemsOrdered[i] != null ? itemsOrdered[i].getCost() : 0;
-            
-            System.out.printf("%d. DVD - %s - %s - %s - %d min: %.2f $\n",
-                i + 1, title, category, director, length, price);
+        for(int i=0; i < itemsOrdered.size(); i++) {
+            if(itemsOrdered.get(i) instanceof DigitalVideoDisc) {
+                DigitalVideoDisc dvd = (DigitalVideoDisc) itemsOrdered.get(i);
+
+                String title = dvd.getTitle() != null ? dvd.getTitle() : "N/A";
+                String category = dvd.getCategory() != null ? dvd.getCategory() : "N/A";
+                String director = dvd.getDirector() != null ? dvd.getDirector() : "N/A";
+                int length = dvd.getLength();
+                double price = dvd.getCost();
+                
+                System.out.printf("%d. media - %s - %s - %s - %d min: %.2f $\n",
+                    i + 1, title, category, director, length, price);
+            }
         }
         
 
@@ -127,10 +111,10 @@ public class Order {
         System.out.println("*******************************************");
     }
 
-    public DigitalVideoDisc getALuckyItem(){
-        int luckyIndex = ThreadLocalRandom.current().nextInt(qtyOrdered);
+    public Media getALuckyItem(){
+        int luckyIndex = ThreadLocalRandom.current().nextInt(itemsOrdered.size());
 
-        return itemsOrdered[luckyIndex];
+        return itemsOrdered.get(luckyIndex);
     }
 
     

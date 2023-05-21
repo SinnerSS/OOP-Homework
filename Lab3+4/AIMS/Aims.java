@@ -9,7 +9,7 @@ public class Aims {
         dvd1.setDirector("Roger Allers");
         dvd1.setLength(87);
 
-        order1.addDigitalVideoDisc(dvd1);
+        order1.addMedia(dvd1);
 
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars");
         dvd2.setCategory("Science Fiction");
@@ -17,7 +17,7 @@ public class Aims {
         dvd2.setDirector("George Lucas");
         dvd2.setLength(124);
 
-        order1.addDigitalVideoDisc(dvd2);
+        order1.addMedia(dvd2);
 
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladdin");
         dvd3.setCategory("Animation");
@@ -25,13 +25,13 @@ public class Aims {
         dvd3.setDirector("John Musker");
         dvd3.setLength(90);
 
-        order1.addDigitalVideoDisc(dvd3);
+        order1.addMedia(dvd3);
 
-        System.out.print("Total Cost is: ");
+        System.out.print("Total cost is: ");
         System.out.printf("%.2f\n",order1.totalCost());
 
-        order1.removeDigitalVideoDisc(dvd1);
-        System.out.print("Total Cost after removing " + dvd1.getTitle() + " is: ");
+        order1.removeMedia(dvd1);
+        System.out.print("Total cost after removing " + dvd1.getTitle() + " is: ");
         System.out.printf("%.2f\n",order1.totalCost());
 
         DigitalVideoDisc dvd4 = new DigitalVideoDisc("The Avengers", "Action", "Joss Whedon", 143, 24.95f);
@@ -41,11 +41,11 @@ public class Aims {
         Order order2 = new Order("Feb 2nd 2022");
         Order order3 = new Order("Aug 15th 2022");
     
-        order2.addDigitalVideoDisc(dvd4);
-        order2.addDigitalVideoDisc(dvd6);
+        order2.addMedia(dvd4);
+        order2.addMedia(dvd6);
     
-        order3.addDigitalVideoDisc(dvd3);
-        order3.addDigitalVideoDisc(dvd5);
+        order3.addMedia(dvd3);
+        order3.addMedia(dvd5);
     
 
         System.out.println("Order 1:");
