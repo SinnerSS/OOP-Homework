@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Book extends Media {
-    private List<String> authors = new ArrayList<String>();
+    private List<String> authors = new ArrayList<>();
 
     public List<String> getAuthors() {
         return authors;
