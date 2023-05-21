@@ -23,5 +23,13 @@ public class Book extends Media {
         authors.remove(authorName);
         return true;
     }
+
+    public Book(String title) {
+        super(title);
+    }
+
+    public Book(String title, String category) {
+        super(title, category);
+    }
     
 }

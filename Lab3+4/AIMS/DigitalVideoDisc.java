@@ -16,20 +16,17 @@ public class DigitalVideoDisc extends Media{
         this.length = length;
     }
     public DigitalVideoDisc(String title) {
-        super.setTitle(title);
+        super(title);
     }
     public DigitalVideoDisc(String title, String category) {
-        super.setTitle(title);
-        super.setCategory(category);
+        super(title, category);
     }
     public DigitalVideoDisc(String title, String category, String director) {
-        super.setTitle(title);
-        super.setCategory(category);
+        super(title, category);
         this.director = director;
     }
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        super.setTitle(title);
-        super.setCategory(category);
+        super(title, category);
         this.director = director;
         this.length = length;
         super.setCost(cost);
