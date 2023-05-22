@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Order {
     public static final int MAX_NUMBER_ORDER = 10;
@@ -8,10 +9,13 @@ public class Order {
 
     public static int nbOrders = 0;
 
+    //TODO: refactor to use hashmap for itemsOrdered
     private List<Media> itemsOrdered = new ArrayList<>();
 
-    private String dateOrdered;
+    private String dateOrdered = null;
 
+    static final AtomicLong NEXT_ID = new AtomicLong(1000);
+    final long id = NEXT_ID.getAndIncrement();
     
 
     public Order() {
@@ -26,12 +30,20 @@ public class Order {
         nbOrders += 1;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getDateOrdered() {
         return dateOrdered;
     }
 
     public void setDateOrdered(String dateOrdered) {
         this.dateOrdered = dateOrdered;
+    }
+
+    public List<Media> getItemsOrdered() {
+        return itemsOrdered;
     }
 
     public boolean addMedia(Media media) {
@@ -82,8 +94,9 @@ public class Order {
     }
 
     public void print() {
-
+        //TODO: add print method for book
         System.out.println("*********************Order****************");
+        System.out.printf("Id: %d\n", id);
         System.out.printf("Date: %s\n", dateOrdered);
         System.out.println("Ordered Items:");
         
