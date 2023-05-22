@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
 public class DigitalVideoDisc extends Media{
-    private String director;
-    private int length;
+    private String director = null;
+    private int length = 0;
     public String getDirector() {
         return director;
     }
