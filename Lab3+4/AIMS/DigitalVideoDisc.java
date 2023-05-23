@@ -1,20 +1,6 @@
 import java.util.Arrays;
 
-public class DigitalVideoDisc extends Media{
-    private String director = null;
-    private int length = 0;
-    public String getDirector() {
-        return director;
-    }
-    public void setDirector(String director) {
-        this.director = director;
-    }
-    public int getLength() {
-        return length;
-    }
-    public void setLength(int length) {
-        this.length = length;
-    }
+public class DigitalVideoDisc extends Disc{
     public DigitalVideoDisc(String title) {
         super(title);
     }
@@ -22,14 +8,11 @@ public class DigitalVideoDisc extends Media{
         super(title, category);
     }
     public DigitalVideoDisc(String title, String category, String director) {
-        super(title, category);
-        this.director = director;
+        super(title, category, director);
+
     }
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        super(title, category);
-        this.director = director;
-        this.length = length;
-        super.setCost(cost);
+        super(title, category, director, length, cost);
     }
     public boolean search(String title){
         String[] tokens = title.toUpperCase().split(" ");
@@ -39,6 +22,10 @@ public class DigitalVideoDisc extends Media{
         }
 
         return true;
+    }
+    public void play() {
+        System.out.println("Playing DVD: " + getTitle());
+        System.out.println("DVD length: " + getLength());
     }
 }
 
