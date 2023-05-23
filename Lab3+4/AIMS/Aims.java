@@ -158,7 +158,8 @@ public class Aims {
         System.out.println("Choose item type:");
         System.out.println("--------------------------------");
         System.out.println("1. Book");
-        System.out.println("2. Dvd");
+        System.out.println("2. DVD");
+        System.out.println("3. CD");
 
 
         selection = inputScan.nextInt();
@@ -169,7 +170,7 @@ public class Aims {
 
 
         System.out.print("Enter title: ");
-        String title = inputScan.nextLine();
+        String itemTitle = inputScan.nextLine();
 
 
         System.out.print("Enter category: ");
@@ -196,7 +197,7 @@ public class Aims {
                 }   while(!author.isEmpty());
 
 
-                Book book = new Book(title, category, authorsList, cost);
+                Book book = new Book(itemTitle, category, authorsList, cost);
                 media = book;
                 
 
@@ -211,26 +212,66 @@ public class Aims {
 
 
                 System.out.print("Enter length: ");
-                int length = inputScan.nextInt();
+                int dvdLength = inputScan.nextInt();
                 inputScan.nextLine();
 
 
-                DigitalVideoDisc dvd = new DigitalVideoDisc(title, category, director, length, cost);
+                DigitalVideoDisc dvd = new DigitalVideoDisc(itemTitle, category, director, dvdLength, cost);
                 media = dvd;
 
 
                 clrscr();
+                preview(dvd);
                 System.out.println("Item " + dvd.getId() + " has been created");
+                clrscr();
                 break;
+
+            
+            case 3:
+                System.out.print("Enter artist: ");
+                String artist = inputScan.nextLine();
+
+
+                CompactDisc cd = new CompactDisc(itemTitle, category);
+                cd.setArtist(artist);
+
+
+                while(true) {
+                    System.out.print("Enter track title: ");
+                    String trackTitle  = inputScan.nextLine();
+
+
+                    if(trackTitle.isEmpty()) break;
+
+
+                    System.out.print("Enter track length: ");
+                    int trackLength = inputScan.nextInt();
+                    inputScan.nextLine();
+
+
+                    Track track = new Track();
+                    track.setTitle(trackTitle);
+                    track.setLength(trackLength);
+
+
+                    cd.addTrack(track);
+
+
+                }
+                clrscr();
+                preview(cd);
+                clrscr();
+                System.out.println("Item " + cd.getId() + " has been created");
+                break;
+                
 
             
         }
 
 
+
         System.out.print("Press enter to continue");
         inputScan.nextLine();
-        
-
         return media;
 
 
@@ -329,6 +370,24 @@ public class Aims {
         return id;
     }
 
+
+    private static void preview(Disc disc) {
+        System.out.print("Play item added(y/n)? ");
+        String selection = inputScan.nextLine();
+
+        if(selection.toUpperCase().equals("Y")) playDisc(disc);
+    }
+
+    private static void playDisc(Disc disc) {
+        if (disc instanceof CompactDisc) {
+            ((CompactDisc) disc).play();
+        } else if (disc instanceof DigitalVideoDisc) {
+
+            ((DigitalVideoDisc) disc).play();
+            System.out.println("Press enter to skip");
+            inputScan.nextLine(); 
+        }
+    }
 
     private static void clrscr(){
         try {
