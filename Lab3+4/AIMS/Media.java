@@ -1,6 +1,6 @@
 import java.util.concurrent.atomic.AtomicLong;
 
-public class Media {
+public abstract class Media {
     private String title = null;
     private String category = null;
     private float cost = 0;
