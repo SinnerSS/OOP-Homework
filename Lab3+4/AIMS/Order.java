@@ -78,11 +78,10 @@ public class Order {
         }
     }
 
-    public boolean removeMedia(Media media) {
-        if(!itemsOrdered.contains(media)) return false;
+    public void removeMedia(Media media) {
+        if(!itemsOrdered.contains(media)) return;
         itemsOrdered.remove(media);
         System.out.println("The media has been removed");
-        return true;
     }
 
     public float totalCost() {
