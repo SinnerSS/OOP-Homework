@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.Semaphore;
 import java.io.IOException;
 
 public class Aims {
@@ -10,12 +11,26 @@ public class Aims {
     private static Scanner inputScan = new Scanner(System.in);
 
 
-    private static final List<Class<?>> mediaType = new ArrayList<>(List.of(Book.class, DigitalVideoDisc.class));
+
+    private static final List<Class<?>> mediaType = new ArrayList<>(List.of(Book.class, DigitalVideoDisc.class, CompactDisc.class));
 
     public static void main(String[] args) {
+        clrscr();
+
+        
         int selection = 0;
+        Semaphore semaphore = new Semaphore(1, true);
+
+        Thread memoryMonitor = new Thread(new MemoryDaemon(semaphore));
+        memoryMonitor.setDaemon(true);
+        memoryMonitor.start();
 
         loop: while(true) {
+            try {
+               semaphore.acquire();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             selection = showMenu();
 
 
@@ -27,12 +42,10 @@ public class Aims {
                 
                 case 2:
                     if(orderList.isEmpty()) {
-                        clrscr();
-
-
                         System.out.println("No order exist");        
                         System.out.print("Press enter to continue");
                         inputScan.nextLine();
+                        clrscr();
                         break;
                     }
 
@@ -87,6 +100,8 @@ public class Aims {
 
 
             }
+            
+            semaphore.release();
         }
 
 
@@ -97,7 +112,6 @@ public class Aims {
 
 
     public static int showMenu() {
-        clrscr();
 
 
         System.out.println("Order Management Application: ");
@@ -113,6 +127,7 @@ public class Aims {
 
         int selection = inputScan.nextInt();
         inputScan.nextLine();
+        clrscr();
 
 
         return selection;
@@ -125,11 +140,9 @@ public class Aims {
         Order order;
 
 
-        clrscr();
-
-
         System.out.print("Enter order date: ");
         String dateOrder = inputScan.nextLine();
+        clrscr();
 
         if(dateOrder.isEmpty())
             order = new Order();
@@ -138,10 +151,10 @@ public class Aims {
         orderList.add(order);
 
 
-        clrscr();
         System.out.println("Order " + order.getId() + " has been added");
         System.out.print("Press enter to continue");
         inputScan.nextLine();
+        clrscr();
 
 
     }
@@ -150,9 +163,6 @@ public class Aims {
     private static Media createItem() {
         int selection = 0;
         Media media = null;
-    
-
-        clrscr();
 
 
         System.out.println("Choose item type:");
@@ -164,8 +174,6 @@ public class Aims {
 
         selection = inputScan.nextInt();
         inputScan.nextLine();
-
-
         clrscr();
 
 
@@ -222,8 +230,8 @@ public class Aims {
 
                 clrscr();
                 preview(dvd);
-                System.out.println("Item " + dvd.getId() + " has been created");
                 clrscr();
+                System.out.println("Item " + dvd.getId() + " has been created");
                 break;
 
             
@@ -258,6 +266,8 @@ public class Aims {
 
 
                 }
+
+                media = cd;
                 clrscr();
                 preview(cd);
                 clrscr();
@@ -272,6 +282,7 @@ public class Aims {
 
         System.out.print("Press enter to continue");
         inputScan.nextLine();
+        clrscr();
         return media;
 
 
@@ -279,7 +290,6 @@ public class Aims {
 
 
     private static void addItemToOrder(Media media) {
-        clrscr();
 
 
         long id = getOrderId();
@@ -290,12 +300,10 @@ public class Aims {
                 order.addMedia(media);
 
 
-                clrscr();
-
-
                 System.out.println("Item " + media.getId() + " has been added to order " + order.getId());
                 System.out.println("Press enter to continue");
                 inputScan.nextLine();
+                clrscr();
 
 
             }
@@ -304,7 +312,6 @@ public class Aims {
 
 
     private static void removeItemFromOrder() {
-        clrscr();
 
 
         long orderId = getOrderId();
@@ -312,9 +319,6 @@ public class Aims {
 
         for(Order order : orderList) {
             if(order.getId() == orderId) {
-                clrscr();
-
-
                 System.out.println("Items list of " + order.getId() + " :");
                 for(Media item : order.getItemsOrdered()) {
                     String typeName = null;
@@ -334,6 +338,7 @@ public class Aims {
                 System.out.print("Select an item Id to remove: ");
                 long itemId = inputScan.nextLong();
                 inputScan.nextLine();
+                clrscr();
 
 
                 for(Media item : order.getItemsOrdered())
@@ -345,7 +350,8 @@ public class Aims {
                 clrscr();
                 System.out.println("Remove item " + itemId + " from order " + order.getId());
                 System.out.println("Press enter to continue");
-                inputScan.nextLine();                
+                inputScan.nextLine();        
+                clrscr();        
                 
 
                 return;
@@ -366,6 +372,7 @@ public class Aims {
         System.out.print("Select an order Id: ");
         long id = inputScan.nextLong();
         inputScan.nextLine();
+        clrscr();
 
         return id;
     }
@@ -385,7 +392,8 @@ public class Aims {
 
             ((DigitalVideoDisc) disc).play();
             System.out.println("Press enter to skip");
-            inputScan.nextLine(); 
+            inputScan.nextLine();
+            clrscr(); 
         }
     }
 
