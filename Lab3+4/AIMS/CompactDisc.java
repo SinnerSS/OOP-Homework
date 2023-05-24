@@ -56,7 +56,7 @@ public class CompactDisc extends Disc implements Playable {
 
         for(Track track : tracks) {
             track.play();
-
+            System.out.println("Press enter to skip");
             enterDetector.nextLine();
 
         }
