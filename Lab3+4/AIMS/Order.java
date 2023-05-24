@@ -49,7 +49,6 @@ public class Order {
     public boolean addMedia(Media media) {
         if(itemsOrdered.size() < MAX_NUMBER_ORDER) {
             itemsOrdered.add(media);
-            System.out.println("The media has been added");
             return true;
         }
         return false;
@@ -81,7 +80,6 @@ public class Order {
     public void removeMedia(Media media) {
         if(!itemsOrdered.contains(media)) return;
         itemsOrdered.remove(media);
-        System.out.println("The media has been removed");
     }
 
     public float totalCost() {
