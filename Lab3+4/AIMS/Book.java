@@ -1,8 +1,40 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Book extends Media implements Comparable<Book> {
     private List<String> authors = new ArrayList<>();
+    private String content = null;
+    private List<String> contentTokens = new ArrayList<>();
+    private Map<String, Integer> wordFrequency = new HashMap<>();
+    
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+        contentTokens = Arrays.asList(content.split("\\s+|\\s?\\p{Punct}\\s?"));
+        wordFrequency = new HashMap<>();
+        for(String token : contentTokens) {
+            if(wordFrequency.containsKey(token)){
+                int count = wordFrequency.get(token);
+                wordFrequency.put(token, count + 1);
+            }
+            wordFrequency.put(token, 1);
+        }
+    }
+
+    public List<String> getContentTokens() {
+        return contentTokens;
+    }
+
+    public Map<String, Integer> getWordFrequency() {
+        return wordFrequency;
+    }
 
     public List<String> getAuthors() {
         return authors;
