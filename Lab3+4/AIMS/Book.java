@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book extends Media {
+public class Book extends Media implements Comparable<Book> {
     private List<String> authors = new ArrayList<>();
 
     public List<String> getAuthors() {
@@ -42,5 +42,11 @@ public class Book extends Media {
         this.authors = authors;
         super.setCost(cost);
     }
-    
+
+    public int compareTo(Book book) {
+        float costDifference = this.getCost() - book.getCost();
+        if (costDifference < 0) return -1; 
+        if (costDifference > 0) return 1;
+        return 0; 
+    }
 }

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class CompactDisc extends Disc implements Playable {
+public class CompactDisc extends Disc implements Playable, Comparable<CompactDisc> {
     private String artist = null;
     private int length = 0;
     private List<Track> tracks = new ArrayList<>();
@@ -60,5 +60,12 @@ public class CompactDisc extends Disc implements Playable {
             enterDetector.nextLine();
 
         }
+    }
+    public int compareTo(CompactDisc cd) {
+        if(tracks.size() > cd.tracks.size()) return 1;
+        if(tracks.size() < cd.tracks.size()) return -1;
+        if(length > cd.length) return 1;
+        if(length < cd.length) return -1;
+        return 0;
     }
 }

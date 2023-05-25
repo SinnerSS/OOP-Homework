@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class DigitalVideoDisc extends Disc{
+public class DigitalVideoDisc extends Disc implements Playable, Comparable<DigitalVideoDisc> {
     public DigitalVideoDisc(String title) {
         super(title);
     }
@@ -26,6 +26,12 @@ public class DigitalVideoDisc extends Disc{
     public void play() {
         System.out.println("Playing DVD: " + getTitle());
         System.out.println("DVD length: " + getLength());
+    }
+    public int compareTo(DigitalVideoDisc dvd) {
+        float costDifference = this.getCost() - dvd.getCost();
+        if (costDifference < 0) return -1; 
+        if (costDifference > 0) return 1; 
+        return 0;   
     }
 }
 
