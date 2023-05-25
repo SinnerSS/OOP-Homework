@@ -103,10 +103,63 @@ public class Aims {
             
             semaphore.release();
         }
-
-
+        
         inputScan.close();
 
+        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King");
+        dvd1.setCategory("Animation");
+        dvd1.setCost(19.95f);
+        dvd1.setDirector("Roger Allers");
+        dvd1.setLength(87);
+
+
+        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars");
+        dvd2.setCategory("Science Fiction");
+        dvd2.setCost(24.95f);
+        dvd2.setDirector("George Lucas");
+        dvd2.setLength(124);
+
+
+        DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladdin");
+        dvd3.setCategory("Animation");
+        dvd3.setCost(18.99f);
+        dvd3.setDirector("John Musker");
+        dvd3.setLength(90);
+
+
+        List<DigitalVideoDisc> collection = new ArrayList<>();
+        
+        // Add the DVD objects to the ArrayList
+        collection.add(dvd2);
+        collection.add(dvd1);
+        collection.add(dvd3);
+
+        // Iterate through the ArrayList and ouput their titles
+        // (unsorted order)
+        java.util.Iterator<DigitalVideoDisc> iterator = collection.iterator();
+
+        System.out.println ("--------------------------------------");
+        System.out.println ("The DVDs in order are: ");
+
+        while (iterator.hasNext()) {
+        System.out.println(((DigitalVideoDisc) iterator.next()).getTitle());
+        }
+
+        // Sort the collection of DVDs - based on the compareTo ()
+        // method
+        java.util.Collections.sort(collection) ;
+
+        // Iterate through the ArrayList and output their titles -
+        // in sorted order
+        iterator = collection.iterator();
+
+        System.out.println ("--------------------------------------");
+        System.out.println ("The DVDs in sorted order are: ");
+
+        while (iterator.hasNext()) {
+        System.out.println(((DigitalVideoDisc) iterator.next()).getTitle());
+        }
+        System.out.println ("--------------------------------------");
 
     }
 
