@@ -47,7 +47,6 @@ public class CompactDisc extends Disc implements Playable, Comparable<CompactDis
 
         System.out.println("Track removed");
     }
-    //TODO: reformat play output
     @SuppressWarnings("resource")   
     public void play() {        
 
@@ -58,7 +57,11 @@ public class CompactDisc extends Disc implements Playable, Comparable<CompactDis
             track.play();
             System.out.println("Press enter to skip");
             enterDetector.nextLine();
-
+            for (int i = 0; i < 4; i++) {
+                System.out.print("\r");
+                System.out.print("\033[2K");
+                System.out.print("\033[1A");
+            }
         }
     }
     public int compareTo(CompactDisc cd) {
