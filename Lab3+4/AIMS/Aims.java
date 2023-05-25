@@ -91,6 +91,7 @@ public class Aims {
                             order.print();
                             System.out.print("Press enter to continue");
                             inputScan.nextLine();
+                            clrscr();
                         }
                     }
                     break;
